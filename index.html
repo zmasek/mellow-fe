@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Mellow</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container px-4">
+      <div class="jumbotron">
+        <h1 class="display-4">Mellow</h1>
+        <p class="lead">Convert Trello export to MindMap file for Coggle.</p>
+        <hr class="my-4">
+        <p>How to use: On Trello board, go to settings/export. Pick JSON. You can either save the result as a file or copy the text to clipboard. Either way, give what you want here and press convert. You'll receive a file to download. Save it and fire up Coggle. Create a new diagram and then drag and drop the saved file to it. That's it.</p>
+      </div>
+
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" id="text-tab" data-toggle="tab" href="#text" role="tab" aria-controls="text" aria-selected="true">As text</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="file-tab" data-toggle="tab" href="#file" role="tab" aria-controls="file" aria-selected="false">As file</a>
+        </li>
+      </ul>
+
+      <form method="post" action="https://mellow-faas.offsetlab.net/" id="form">
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="text" role="tabpanel" aria-labelledby="text-tab">
+            <div class="mb-3">
+              <label for="text-input">JSON Export</label>
+              <textarea class="form-control" id="text-input" name="text" placeholder="{}"></textarea>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="file" role="tabpanel" aria-labelledby="file-tab">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="file-input">
+              <label class="custom-file-label" for="file-input">Choose file</label>
+            </div>
+          </div>
+        </div>
+        <p id="error" class="d-none"></p>
+        <a href="#" download="coggle.mm" id="link"></a>
+        <button type="submit" class="btn btn-dark">
+          <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+          Convert
+        </button>
+      </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="static/main.js"></script>
+  </body>
+</html>
