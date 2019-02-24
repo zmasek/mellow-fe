@@ -1,5 +1,4 @@
 $(() => {
-
   const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
     const byteCharacters = atob(b64Data);
     const byteArrays = [];
@@ -28,6 +27,7 @@ $(() => {
   };
 
   const fileInput = $('#file-input');
+  const textInput = $('#text-input');
   fileInput.on('change', (event) => {
     const fileName = fileInput.val();
     var cleanFileName = fileName.replace('C:\\fakepath\\', ' ')
@@ -36,29 +36,29 @@ $(() => {
     const file = fileInput.prop('files')[0];
     const reader = new FileReader();
     reader.addEventListener('load', function(event) {
-      $('#text-input').val(event.target.result);
+      textInput.val(event.target.result);
     });
     reader.readAsText(file);
   });
 
-  $('#form').submit((event) => {
+  const form = $('#form');
+  const button = $('.btn');
+  const url = form.attr('action');
+  const method = form.attr('method').toUpperCase();
+  const link = $('#link');
+  const error = $('#error');
+  form.submit((event) => {
     event.preventDefault();
-    const button = $('.btn');
     setLoading(button);
 
-    const form = $('#form');
-    const url = form.attr('action');
-    const link = $('#link');
-
     $.ajax({
-      method: form.attr('method').toUpperCase(),
+      method: method,
       url: url,
       crossDomain: true,
       data: form.serialize(),
       dataType: 'json',
     }).done(function(data){
       if (data.status) {
-        const error = $('#error');
         error.text(data.status);
         error.removeClass('d-none');
       } else {
