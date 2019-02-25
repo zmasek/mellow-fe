@@ -26,9 +26,39 @@ $(() => {
     button.children('.spinner-border').addClass('d-none');
   };
 
+  const removeDragData = (event) => {
+    if (event.originalEvent.dataTransfer.items) {
+      event.originalEvent.dataTransfer.items.clear();
+    } else {
+      event.originalEvent.dataTransfer.clearData();
+    }
+  }
+
   const fileInput = $('#file-input');
+  const dropZone = $('#drop-zone');
+  dropZone.on('drop', (event) => {
+    event.preventDefault();
+    if (event.originalEvent.dataTransfer.items) {
+      for (var i = 0; i < event.originalEvent.dataTransfer.items.length; i++) {
+        if (event.originalEvent.dataTransfer.items[i].kind === 'file') {
+          var file = event.originalEvent.dataTransfer.items[i].getAsFile();
+          fileInput.prop('files')[0] = file;
+          fileInput.trigger('change');
+        }
+      }
+    }
+    removeDragData(event)
+    dropZone.removeClass('border border-warning');
+  });
+  dropZone.on('dragover', (event) => {
+    event.preventDefault();
+    dropZone.addClass('border border-warning');
+  });
+
+  const button = $('.btn');
   const textInput = $('#text-input');
   fileInput.on('change', (event) => {
+    setLoading(button);
     const fileName = fileInput.val();
     var cleanFileName = fileName.replace('C:\\fakepath\\', ' ')
     fileInput.next('.custom-file-label').html(cleanFileName);
@@ -37,12 +67,12 @@ $(() => {
     const reader = new FileReader();
     reader.addEventListener('load', function(event) {
       textInput.val(event.target.result);
+      unsetLoading(button);
     });
     reader.readAsText(file);
   });
 
   const form = $('#form');
-  const button = $('.btn');
   const url = form.attr('action');
   const method = form.attr('method').toUpperCase();
   const link = $('#link');
