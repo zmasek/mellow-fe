@@ -26,6 +26,16 @@ $(() => {
     button.children('.spinner-border').addClass('d-none');
   };
 
+  const setError = (element, text) => {
+    element.text(text);
+    element.removeClass('d-none');
+  };
+
+  const unsetError = (element) => {
+    element.text('');
+    element.addClass('d-none');
+  };
+
   const removeDragData = (event) => {
     if (event.originalEvent.dataTransfer.items) {
       event.originalEvent.dataTransfer.items.clear();
@@ -79,6 +89,7 @@ $(() => {
   const error = $('#error');
   form.submit((event) => {
     event.preventDefault();
+    unsetError(error);
     setLoading(button);
 
     $.ajax({
@@ -89,8 +100,7 @@ $(() => {
       dataType: 'json',
     }).done(function(data){
       if (data.status) {
-        error.text(data.status);
-        error.removeClass('d-none');
+        setError(error, data.status);
       } else {
         const contentType = 'application/xml';
         const blob = b64toBlob(data.file, contentType);
@@ -99,8 +109,8 @@ $(() => {
         link[0].click();
       }
       unsetLoading(button);
-    }).fail(function(data){
-      console.log(data);
+    }).fail(function(jqXHR, textStatus){
+      setError(error, textStatus);
     });
   });
 });
