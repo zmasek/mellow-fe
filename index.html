@@ -20,18 +20,17 @@
 
       <form method="post" action="https://mellow-faas.offsetlab.net/" id="form">
         <div class="mb-3">
-          <span>Select or drag and drop a file:</span>
-          <div class="input-group">
+          <label>Select or drag and drop a file:</label>
+          <div class="input-group mb-3">
             <input type="file" class="custom-file-input" id="file-input">
             <label class="custom-file-label" for="file-input">Choose file</label>
           </div>
-          <span>Or paste in the JSON manually:</span>
-          <label for="text-input">JSON Export</label>
+          <label for="text-input">Or paste in the JSON manually:</label>
           <textarea class="form-control" id="text-input" name="text" placeholder="{}"></textarea>
         </div>
         <p id="error" class="d-none text-danger"></p>
         <a href="#" download="coggle.mm" id="link"></a>
-        <button type="submit" class="btn btn-dark">
+        <button type="submit" class="btn btn-dark" disabled>
           <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
           Convert
         </button>

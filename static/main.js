@@ -76,6 +76,14 @@ $(() => {
     reader.readAsText(file);
   });
 
+  textInput.on('input', (event) => {
+    if (event.originalEvent.target.value) {
+      button.prop('disabled', false);
+    } else {
+      button.prop('disabled', true);
+    }
+  });
+
   const form = $('#form');
   const url = form.attr('action');
   const method = form.attr('method').toUpperCase();
