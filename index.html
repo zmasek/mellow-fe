@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/main.css">
   </head>
   <body class="d-flex flex-column h-100">
+    <div id="overlay"></div>
     <main class="container mt-3 mb-1 flex-shrink-0" role="main">
       <div class="jumbotron py-4">
         <h1 class="display-4">Mellow</h1>
@@ -18,12 +20,10 @@
 
       <form method="post" action="https://mellow-faas.offsetlab.net/" id="form">
         <div class="mb-3">
-          <div id="drop-zone">
-            <span>Select or drag and drop a file:</span>
-            <div class="input-group">
-              <input type="file" class="custom-file-input" id="file-input">
-              <label class="custom-file-label" for="file-input">Choose file</label>
-            </div>
+          <span>Select or drag and drop a file:</span>
+          <div class="input-group">
+            <input type="file" class="custom-file-input" id="file-input">
+            <label class="custom-file-label" for="file-input">Choose file</label>
           </div>
           <span>Or paste in the JSON manually:</span>
           <label for="text-input">JSON Export</label>

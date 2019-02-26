@@ -44,25 +44,19 @@ $(() => {
     }
   }
 
+  const overlay = $('#overlay');
   const fileInput = $('#file-input');
-  const dropZone = $('#drop-zone');
+  const dropZone = $('body');
   dropZone.on('drop', (event) => {
     event.preventDefault();
-    if (event.originalEvent.dataTransfer.items) {
-      for (var i = 0; i < event.originalEvent.dataTransfer.items.length; i++) {
-        if (event.originalEvent.dataTransfer.items[i].kind === 'file') {
-          var file = event.originalEvent.dataTransfer.items[i].getAsFile();
-          fileInput.prop('files')[0] = file;
-          fileInput.trigger('change');
-        }
-      }
-    }
+    fileInput.prop('files', event.originalEvent.dataTransfer.files);
     removeDragData(event)
-    dropZone.removeClass('border border-warning');
+    overlay.hide();
+    fileInput.trigger('change');
   });
   dropZone.on('dragover', (event) => {
     event.preventDefault();
-    dropZone.addClass('border border-warning');
+    overlay.show();
   });
 
   const button = $('.btn');
