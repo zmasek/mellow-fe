@@ -112,7 +112,12 @@ $(() => {
       }
       unsetLoading(button);
     }).fail(function(jqXHR, textStatus){
-      setError(error, textStatus);
+      let errorText = textStatus;
+      if (jqXHR.status === 400) {
+        errorText = jqXHR.responseJSON.status;
+      }
+      setError(error, errorText);
+      unsetLoading(button);
     });
   });
 });
